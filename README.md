@@ -1,2 +1,2 @@
 # Leetcode
-A place to practive Leetcode questions!
+A place to practice Leetcode questions!
