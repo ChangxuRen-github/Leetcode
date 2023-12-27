@@ -15,7 +15,7 @@ jobs:
     - name: Check for Specific Files
       run: |
         chmod +x ./.github/scripts/check-files.sh
-        ./github/scripts/check-files.sh > files_to_check.txt
+        ./.github/scripts/check-files.sh > files_to_check.txt
 
     - name: Send Email if Necessary
       if: steps.check-files.outputs.files != ''
