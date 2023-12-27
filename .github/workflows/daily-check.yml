@@ -27,7 +27,6 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: Files to Revisit
-        # Change to your email
-        to: user@example.com
+        to: ${{ secrets.USER_EMAIL }}
         from: GitHub Actions
         body: file://files_to_check.txt
