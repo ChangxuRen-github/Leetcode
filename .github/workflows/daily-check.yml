@@ -3,6 +3,7 @@ name: Daily File Check
 on:
   schedule:
     - cron: '0 8 * * *'
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   check-files:
@@ -12,18 +13,26 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Use the latest version of Python 3
+
+    - name: Install Dependencies
+      run: |
+        pip install GitPython
+
     - name: Check for Specific Files
       id: check_files
       run: |
-        chmod +x ./.github/scripts/check-files.sh
-        ./.github/scripts/check-files.sh > files_to_check.txt
-        if [ -s files_to_check.txt ]; then
+        python ./.github/scripts/check_files.py
+        if [ -s links_to_check.txt ]; then
           echo "::set-output name=has_files::true"
         else
           echo "::set-output name=has_files::false"
         fi
 
-    - name: Send Email if Files to Revisit
+    - name: Send Email with Links if Files to Revisit
       if: steps.check_files.outputs.has_files == 'true'
       uses: dawidd6/action-send-mail@v2
       with:
@@ -34,7 +43,8 @@ jobs:
         subject: Files to Revisit
         to: ${{ secrets.USER_EMAIL }}
         from: GitHub Actions
-        body: file://files_to_check.txt
+        body: |
+          $(awk '{printf "[%s](%s)\n", $1, $2}' links_to_check.txt)
 
     - name: Send Email if No Files to Revisit
       if: steps.check_files.outputs.has_files == 'false'
