@@ -14,7 +14,8 @@ def extract_leetcode_links(file_path):
                     link_text = match.group(1)
                     link_url = match.group(2)
                     # Format the link as Markdown
-                    markdown_link = f"[{link_text}]({link_url})"
+                    # markdown_link = f"[{link_text}]({link_url})"
+                    markdown_link = f"<a href={link_url}>{link_text}</a>"
                     links.append(markdown_link)
     except Exception as e:
         print(f"Error processing file {file_path}: {e}")
