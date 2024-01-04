@@ -4,6 +4,7 @@ import datetime
 from git import Repo
 
 def extract_leetcode_links(file_path):
+    print("executed is extract_leetcode_links")
     links = []
     try:
         with open(file_path, 'r') as file:
@@ -17,6 +18,7 @@ def extract_leetcode_links(file_path):
     return links
 
 def is_recent_file(file_path):
+    print("executed is recent file")
     try:
         with open(file_path, 'r') as file:
             # Read the first line of the file
