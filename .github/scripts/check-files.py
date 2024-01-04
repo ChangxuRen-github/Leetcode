@@ -45,7 +45,7 @@ def main():
 
     # Check each file in the Leetcode/Questions directory
     for file in repo.git.ls_tree('-r', '--name-only', 'HEAD', base_path).splitlines():
-        file_path = os.path.join(base_path, file)
+        file_path = os.path.join('.', file)
         if is_recent_file(file_path):
             links = extract_leetcode_links(file_path)
             recent_links.extend(links)
