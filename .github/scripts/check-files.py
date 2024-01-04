@@ -4,7 +4,6 @@ import datetime
 from git import Repo
 
 def extract_leetcode_links(file_path):
-    print("executed is extract_leetcode_links")
     links = []
     try:
         with open(file_path, 'r') as file:
@@ -12,13 +11,16 @@ def extract_leetcode_links(file_path):
                 # Search for Markdown links
                 match = re.search(r'\[(.+?)\]\((https://leetcode.com/problems/.+?)\)', line)
                 if match:
-                    links.append((match.group(1), match.group(2)))
+                    link_text = match.group(1)
+                    link_url = match.group(2)
+                    # Format the link as Markdown
+                    markdown_link = f"[{link_text}]({link_url})"
+                    links.append(markdown_link)
     except Exception as e:
         print(f"Error processing file {file_path}: {e}")
     return links
 
 def is_recent_file(file_path):
-    print("executed is recent file")
     try:
         with open(file_path, 'r') as file:
             # Read the first line of the file
@@ -28,8 +30,6 @@ def is_recent_file(file_path):
             if match:
                 file_date = datetime.datetime.strptime(match.group(1), '%Y-%m-%d %H:%M:%S').date()
                 today = datetime.date.today()
-                print(today)
-                print(file_date)
                 # Check if the date is 1, 3, or 15 days ago
                 return file_date in [today - datetime.timedelta(days=d) for d in [1, 3, 15]]
     except Exception as e:
@@ -52,8 +52,8 @@ def main():
 
     # Output the links to check
     with open('links_to_check.txt', 'w') as f:
-        for name, url in recent_links:
-            f.write(f"{name}: {url}\n")
+        for markdown_link in recent_links:
+            f.write(f"{markdown_link}\n")
 
 if __name__ == "__main__":
     main()
