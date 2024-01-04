@@ -28,9 +28,12 @@ def is_recent_file(file_path):
             first_line = file.readline()
             # Extract timestamp from the HTML comment
             match = re.search(r'<!-- (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) -->', first_line)
+            print(file_path)
             if match:
                 file_date = datetime.datetime.strptime(match.group(1), '%Y-%m-%d %H:%M:%S').date()
                 today = datetime.date.today()
+                print(file_date)
+                print(today)
                 # Check if the date is 1, 3, or 15 days ago
                 return file_date in [today - datetime.timedelta(days=d) for d in [1, 3, 15]]
     except Exception as e:
