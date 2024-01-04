@@ -25,7 +25,7 @@ jobs:
     - name: Check for Specific Files
       id: check_files
       run: |
-        python ./.github/scripts/check_files.py
+        python ./.github/scripts/check-files.py
         if [ -s links_to_check.txt ]; then
           echo "::set-output name=has_files::true"
         else
