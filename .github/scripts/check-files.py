@@ -58,6 +58,7 @@ def main():
     with open('links_to_check.txt', 'w') as f:
         for markdown_link in recent_links:
             f.write(f"{markdown_link}\n")
-
+    #debug
+    print(recent_links)
 if __name__ == "__main__":
     main()
