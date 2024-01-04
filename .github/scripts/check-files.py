@@ -39,7 +39,7 @@ def is_recent_file(file_path):
 def main():
     print("Chanxu: run main")
     # Path to the Questions directory in the repository
-    base_path = '/Questions'  # Modify this path if different
+    base_path = './Questions'  # Modify this path if different
     repo = Repo('.')
     recent_links = []
 
