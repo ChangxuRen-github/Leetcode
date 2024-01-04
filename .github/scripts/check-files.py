@@ -53,6 +53,8 @@ def main():
         file_path = os.path.join('.', file)
         if is_recent_file(file_path):
             links = extract_leetcode_links(file_path)
+            print(file_path)
+            print(links)
             recent_links.extend(links)
 
     # Output the links to check
