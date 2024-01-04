@@ -44,6 +44,7 @@ jobs:
         to: ${{ secrets.USER_EMAIL }}
         from: GitHub Actions
         body: file://links_to_check.txt
+        content_type: text/html
 
     - name: Send Email if No Files to Revisit
       if: steps.check_files.outputs.has_files == 'false'
