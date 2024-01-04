@@ -34,6 +34,7 @@ def is_recent_file(file_path):
                 today = datetime.date.today()
                 print(file_date)
                 print(today)
+                print(file_date in [today - datetime.timedelta(days=d) for d in [1, 3, 15]])
                 # Check if the date is 1, 3, or 15 days ago
                 return file_date in [today - datetime.timedelta(days=d) for d in [1, 3, 15]]
     except Exception as e:
