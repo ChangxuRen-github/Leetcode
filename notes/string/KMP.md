@@ -191,6 +191,13 @@ case 2: p[k] != p[j]
         else repeat the above searching, until p[0] = -1.
 
 
+Some relations: 
+if we denote idex of character in pattern (0-based) as i, idex of element in next (0-based) as j: 
+(1) next[j = i + 1] is the length of the longest proper suffix of str[0:i] equal to prefix of str.
+(2) next[j = i] is the length of the longest proper suffix of str[0:i) equal to prefix of str.
+
+
+
 
 ```Java
 int[] buildNext(String pattern) {
@@ -213,9 +220,12 @@ int search(String text, String pattern) {
     int tLen = text.length();
     int pLen = text.length();
     int[] next = buildNext(pattern);
-    int matchedLen = 0;
+    // semantics of matchedLen: 
+    // if it represents count ---> number of matched characters
+    // if it represents idex in pattern ---> next character to match
+    int matchedLen = 0; 
     int idx = 0;
-    while (idx < teLen && matchedLen < pLen) {
+    while (idx < tLen && matchedLen < pLen) {
         if (matchedLen == -1 || text.charAt(i) == pattern.charAt(matchedLen)) {
             i++;
             matchedLen++;
